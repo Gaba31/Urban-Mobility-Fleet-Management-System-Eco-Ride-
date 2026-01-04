@@ -1,4 +1,6 @@
-class Vehicle:
+from abc import ABC , abstractmethod
+
+class Vehicle(ABC):
 
     def __init__(self, vehicle_id, model, battery_percentage):
         self.vehicle_id = int(vehicle_id)
