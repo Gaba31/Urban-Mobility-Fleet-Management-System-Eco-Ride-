@@ -73,6 +73,10 @@ class Vehicle(ABC):
         else:
             raise ValueError("Battery Percentage must be between 0 and 100")
 
+    @abstractmethod
+    def calculate_trip_cost(self):
+        pass
+
 
 class ElectricCar(Vehicle):
     def __init__(self,vehicle_id,model,battery_percentage,seating_capacity):
@@ -95,6 +99,9 @@ class ElectricCar(Vehicle):
         else:
             raise ValueError("Seating Capacity can't be in decimal number or in a String Format")
 
+    def calculate_trip_cost(self):
+        pass
+
 class ElectricScooter(Vehicle):
     def __init__(self,vehicle_id, model, battery_percentage,max_speed_limit):
         super().__init__(vehicle_id,model,battery_percentage)
@@ -116,3 +123,5 @@ class ElectricScooter(Vehicle):
             self.max_speed_limit = int(max_speed_limit)
         else:
             raise ValueError("Speed limit can't be -ve or greater than 130 or can't be a string")
+
+    def calculate_trip_cost(self):
