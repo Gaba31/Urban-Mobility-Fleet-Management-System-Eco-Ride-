@@ -74,7 +74,14 @@ class Vehicle(ABC):
             raise ValueError("Battery Percentage must be between 0 and 100")
 
     @abstractmethod
-    def calculate_trip_cost(self):
+    def calculate_trip_cost(self,usage):
+        """
+           Calculates trip cost.
+
+           usage:
+               - distance in km (for car)
+               - time in minutes (for scooter)
+           """
         pass
 
 
@@ -99,8 +106,16 @@ class ElectricCar(Vehicle):
         else:
             raise ValueError("Seating Capacity can't be in decimal number or in a String Format")
 
-    def calculate_trip_cost(self):
-        pass
+    def calculate_trip_cost(self, distance):
+        """
+        distance : int or float (in km)
+        """
+        if not isinstance(distance, (int, float)) or distance < 0:
+            raise ValueError("Distance must be a positive number")
+
+        base_fare = 5.0
+        cost_per_km = 0.5
+        return base_fare + (cost_per_km * distance)
 
 class ElectricScooter(Vehicle):
     def __init__(self,vehicle_id, model, battery_percentage,max_speed_limit):
@@ -124,4 +139,16 @@ class ElectricScooter(Vehicle):
         else:
             raise ValueError("Speed limit can't be -ve or greater than 130 or can't be a string")
 
-    def calculate_trip_cost(self):
+    def calculate_trip_cost(self, minutes):
+        """
+        minutes : int or float (time in minutes)
+        """
+        if not isinstance(minutes, (int, float)) or minutes < 0:
+            raise ValueError("Minutes must be a positive number")
+
+        base_fare = 1.0
+        cost_per_minute = 0.15
+        return base_fare + (cost_per_minute * minutes)
+
+
+
