@@ -72,3 +72,25 @@ class Vehicle:
             raise ValueError("Battery Percentage must be between 0 and 100")
 
 
+class ElectricCar(Vehicle):
+    def __init__(self,vehicle_id,model,battery_percentage,seating_capacity):
+        super().__init__(vehicle_id,model,battery_percentage)
+        self.seating_capacity = None
+        self.set_seating_capacity(seating_capacity)
+
+    def set_seating_capacity(self,seating_capacity):
+        """
+            Sets the seating_capacity of car
+
+            Parameters
+                seating_capacity : int
+
+            Raises
+                ValueError if the capacity is not of int type
+        """
+        if isinstance(seating_capacity,int):
+            self.seating_capacity = seating_capacity
+        else:
+            raise ValueError("Seating Capacity can't be in decimal number or in a String Format")
+
+
