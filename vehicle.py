@@ -93,4 +93,24 @@ class ElectricCar(Vehicle):
         else:
             raise ValueError("Seating Capacity can't be in decimal number or in a String Format")
 
+class ElectricScooter(Vehicle):
+    def __init__(self,vehicle_id, model, battery_percentage,max_speed_limit):
+        super().__init__(vehicle_id,model,battery_percentage)
+        self.max_speed_limit = None
+        self.set_max_speed_limit(max_speed_limit)
 
+    def set_max_speed_limit(self,max_speed_limit):
+        """
+            Set the speed limit for Electric Scooter
+
+            Parameter
+            -----
+                max_speed_limit : int or float
+
+            Raises
+                Value Error : Value can't be -ve or greater than 130 or can't be a string
+        """
+        if isinstance(max_speed_limit,(int,float)) and (max_speed_limit<=130 and max_speed_limit>=0):
+            self.max_speed_limit = int(max_speed_limit)
+        else:
+            raise ValueError("Speed limit can't be -ve or greater than 130 or can't be a string")
