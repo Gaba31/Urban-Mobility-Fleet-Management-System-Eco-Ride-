@@ -12,7 +12,8 @@ class EcoRideMain:
         print("3. View Vehicles by Hub")
         print("4. Search Vehicles (Battery > 80%)")
         print("5. View Vehicles by Type")
-        print("6. Exit")
+        print("6. Fleet Analytics (Vehicle Status Count)")
+        print("7. Exit")
 
     @staticmethod
     def main():
@@ -21,7 +22,7 @@ class EcoRideMain:
 
         while True:
             EcoRideMain.display_menu()
-            choice = input("Enter your choice (1-6): ").strip()
+            choice = input("Enter your choice (1-7): ").strip()
 
             # This one is for adding hub
             if choice == "1":
@@ -110,8 +111,15 @@ class EcoRideMain:
                 else:
                     for v in categorized["ElectricScooter"]:
                         print(f"- ID: {v.vehicle_id}, Model: {v.model}, Battery: {v.battery_percentage}%")
-            # Exit
+
             elif choice == "6":
+                summary = fleet_manager.fleet_status_summary
+
+                print("\n--- Fleet Status Summary ---")
+                for status, count in summary.items():
+                    print(f"{status}: {count}")
+            # Exit
+            elif choice == "7":
                 print("Thank you for using Eco-Ride")
                 break
 
