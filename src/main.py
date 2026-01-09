@@ -13,7 +13,8 @@ class EcoRideMain:
         print("4. Search Vehicles (Battery > 80%)")
         print("5. View Vehicles by Type")
         print("6. Fleet Analytics (Vehicle Status Count)")
-        print("7. Exit")
+        print("7. Sort Vehicles in Hub by Model (A-Z)")
+        print("8. Exit")
 
     @staticmethod
     def main():
@@ -22,7 +23,7 @@ class EcoRideMain:
 
         while True:
             EcoRideMain.display_menu()
-            choice = input("Enter your choice (1-7): ").strip()
+            choice = input("Enter your choice (1-8): ").strip()
 
             # This one is for adding hub
             if choice == "1":
@@ -118,13 +119,24 @@ class EcoRideMain:
                 print("\n--- Fleet Status Summary ---")
                 for status, count in summary.items():
                     print(f"{status}: {count}")
-            # Exit
+
             elif choice == "7":
+                hub_name = input("Enter hub name: ").strip()
+                sorted_vehicles = fleet_manager.sort_vehicles_by_model(hub_name)
+
+                if not sorted_vehicles:
+                    print("No vehicles to display")
+                else:
+                    print(f"\nVehicles in '{hub_name}' (Sorted by Model):")
+                    for v in sorted_vehicles:
+                        print(v)
+            # Exit
+            elif choice == "8":
                 print("Thank you for using Eco-Ride")
                 break
 
             else:
-                print("Invalid choice. Please select between 1 and 6.")
+                print("Invalid choice. Please select between 1 and 8.")
 
 
 if __name__ == "__main__":

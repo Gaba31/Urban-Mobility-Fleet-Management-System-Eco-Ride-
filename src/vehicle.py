@@ -90,8 +90,9 @@ class Vehicle(ABC):
             return False
         return self.vehicle_id == other.vehicle_id
 
-    def __hash__(self):
-        return hash(self.vehicle_id)
+
+    def __str__(self):
+        return f"ID: {self.vehicle_id}, Model: {self.model}, Battery: {self.battery_percentage}%"
 
 
 class ElectricCar(Vehicle):
