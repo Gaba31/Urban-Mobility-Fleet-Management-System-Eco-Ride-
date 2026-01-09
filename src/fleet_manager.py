@@ -23,3 +23,13 @@ class FleetManager:
 
     def get_vehicles_by_hub(self, hub_name):
         return self.hubs.get(hub_name, [])
+
+    def search_vehicles_by_battery(self,min_battery=80):
+        all_vehicles = []
+
+        for vehicles in self.hubs.values():
+            all_vehicles.extend(vehicles)
+
+        return list(
+            filter(lambda v: v.battery_percentage > min_battery, all_vehicles)
+        )
