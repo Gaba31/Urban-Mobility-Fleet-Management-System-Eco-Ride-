@@ -10,7 +10,8 @@ class EcoRideMain:
         print("1. Add Fleet Hub")
         print("2. Add Vehicle to Hub")
         print("3. View Vehicles by Hub")
-        print("4. Exit")
+        print("4. Search Vehicles (Battery > 80%)")
+        print("5. Exit")
 
     @staticmethod
     def main():
@@ -19,7 +20,7 @@ class EcoRideMain:
 
         while True:
             EcoRideMain.display_menu()
-            choice = input("Enter your choice (1-4): ").strip()
+            choice = input("Enter your choice (1-5): ").strip()
 
             # This one is for adding hub
             if choice == "1":
@@ -75,13 +76,29 @@ class EcoRideMain:
                     for v in vehicles:
                         print(f"- ID: {v.vehicle_id}, Model: {v.model}, Battery: {v.battery_percentage}%")
 
-            # Exit
             elif choice == "4":
+                try:
+                    min_battery = int(input("Enter minimum battery percentage: "))
+                except ValueError:
+                    print("Battery percentage must be a number")
+                    continue
+
+                results = fleet_manager.search_vehicles_by_battery(min_battery)
+
+                if not results:
+                    print("No vehicles found with battery above given percentage")
+                else:
+                    print("\nVehicles with high battery:")
+                    for v in results:
+                        print(f"- ID: {v.vehicle_id}, Model: {v.model}, Battery: {v.battery_percentage}%")
+
+            # Exit
+            elif choice == "5":
                 print("Thank you for using Eco-Ride")
                 break
 
             else:
-                print("Invalid choice. Please select between 1 and 4.")
+                print("Invalid choice. Please select between 1 and 5.")
 
 
 if __name__ == "__main__":
