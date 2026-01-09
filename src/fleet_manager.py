@@ -1,3 +1,5 @@
+from vehicle import ElectricCar , ElectricScooter
+
 class FleetManager:
     def __init__(self):
         self.hubs = {}
@@ -33,3 +35,19 @@ class FleetManager:
         return list(
             filter(lambda v: v.battery_percentage > min_battery, all_vehicles)
         )
+
+    def get_vehicle_by_type(self):
+
+        categorized = {
+            "ElectricCar": [],
+            "ElectricScooter": []
+        }
+
+        for vehicles in self.hubs.values():
+            for vehicle in vehicles:
+                if isinstance(vehicle, ElectricCar):
+                    categorized["ElectricCar"].append(vehicle)
+                elif isinstance(vehicle, ElectricScooter):
+                    categorized["ElectricScooter"].append(vehicle)
+
+        return categorized
