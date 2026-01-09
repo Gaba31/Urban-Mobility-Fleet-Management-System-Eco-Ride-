@@ -69,3 +69,13 @@ class FleetManager:
                     status_counts[status] = 1
 
         return status_counts
+
+    def sort_vehicles_by_model(self, hub_name):
+        if hub_name not in self.hubs:
+            print(f"Hub '{hub_name}' does not exist")
+            return []
+
+        return sorted(
+            self.hubs[hub_name],
+            key=lambda v: v.model.lower()
+        )
