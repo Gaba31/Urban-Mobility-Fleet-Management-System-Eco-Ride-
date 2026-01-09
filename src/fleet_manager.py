@@ -51,3 +51,21 @@ class FleetManager:
                     categorized["ElectricScooter"].append(vehicle)
 
         return categorized
+
+    def fleet_status_summary(self):
+        status_counts = {
+            "Available": 0,
+            "On Trip": 0,
+            "Under Maintenance": 0
+        }
+
+        for vehicles in self.hubs.values():
+            for v in vehicles:
+                status = v.get_maintenance_status()
+                if status in status_counts:
+                    status_counts[status] += 1
+                else:
+                #Handling because of invalid status other than Available,On trip and Under maintainance
+                    status_counts[status] = 1
+
+        return status_counts
