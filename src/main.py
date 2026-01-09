@@ -11,7 +11,8 @@ class EcoRideMain:
         print("2. Add Vehicle to Hub")
         print("3. View Vehicles by Hub")
         print("4. Search Vehicles (Battery > 80%)")
-        print("5. Exit")
+        print("5. View Vehicles by Type")
+        print("6. Exit")
 
     @staticmethod
     def main():
@@ -20,7 +21,7 @@ class EcoRideMain:
 
         while True:
             EcoRideMain.display_menu()
-            choice = input("Enter your choice (1-5): ").strip()
+            choice = input("Enter your choice (1-6): ").strip()
 
             # This one is for adding hub
             if choice == "1":
@@ -92,13 +93,30 @@ class EcoRideMain:
                     for v in results:
                         print(f"- ID: {v.vehicle_id}, Model: {v.model}, Battery: {v.battery_percentage}%")
 
-            # Exit
+
             elif choice == "5":
+                categorized = fleet_manager.get_vehicles_by_type()
+
+                print("\n--- Electric Cars ---")
+                if not categorized["ElectricCar"]:
+                    print("No Electric Cars found")
+                else:
+                    for v in categorized["ElectricCar"]:
+                        print(f"- ID: {v.vehicle_id}, Model: {v.model}, Battery: {v.battery_percentage}%")
+
+                print("\n--- Electric Scooters ---")
+                if not categorized["ElectricScooter"]:
+                    print("No Electric Scooters found")
+                else:
+                    for v in categorized["ElectricScooter"]:
+                        print(f"- ID: {v.vehicle_id}, Model: {v.model}, Battery: {v.battery_percentage}%")
+            # Exit
+            elif choice == "6":
                 print("Thank you for using Eco-Ride")
                 break
 
             else:
-                print("Invalid choice. Please select between 1 and 5.")
+                print("Invalid choice. Please select between 1 and 6.")
 
 
 if __name__ == "__main__":
