@@ -14,6 +14,10 @@ class FleetManager:
             print(f"Hub '{hub_name}' does not exist")
             return
 
+        if vehicle in self.hubs[hub_name]:
+            print("Vehicle with this ID already exists in the hub")
+            return
+
         self.hubs[hub_name].append(vehicle)
         print(f"Vehicle added to hub '{hub_name}'")
 

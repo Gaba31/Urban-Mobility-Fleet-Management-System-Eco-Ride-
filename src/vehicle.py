@@ -85,6 +85,15 @@ class Vehicle(ABC):
         pass
 
 
+    def __eq__(self, other):
+        if not isinstance(other, Vehicle):
+            return False
+        return self.vehicle_id == other.vehicle_id
+
+    def __hash__(self):
+        return hash(self.vehicle_id)
+
+
 class ElectricCar(Vehicle):
     def __init__(self,vehicle_id,model,battery_percentage,seating_capacity):
         super().__init__(vehicle_id,model,battery_percentage)
