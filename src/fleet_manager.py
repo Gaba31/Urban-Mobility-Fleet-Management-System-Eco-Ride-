@@ -79,3 +79,19 @@ class FleetManager:
             self.hubs[hub_name],
             key=lambda v: v.model.lower()
         )
+
+    def sort_vehicles_by_battery(self):
+        all_vehicles = []
+
+        for vehicles in self.hubs.values():
+            all_vehicles.extend(vehicles)
+
+        if not all_vehicles:
+            print("No vehicles available")
+            return []
+
+        return sorted(
+            all_vehicles,
+            key=lambda v: v.battery_percentage,
+            reverse=True
+        )
